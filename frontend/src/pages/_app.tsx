@@ -1,5 +1,4 @@
 import { AppProps } from "next/app";
-import { WrapRedux } from "state/reduxWrapper";
 import { ChakraProvider } from "@chakra-ui/react";
 import "styles/global.scss";
 import { FC, useEffect } from "react";
@@ -13,15 +12,13 @@ const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <WrapRedux>
-      <ChakraProvider theme={theme}>
-        <GoogleReCaptchaProvider
-          reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        >
-          <Component {...pageProps} />
-        </GoogleReCaptchaProvider>
-      </ChakraProvider>
-    </WrapRedux>
+    <ChakraProvider theme={theme}>
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      >
+        <Component {...pageProps} />
+      </GoogleReCaptchaProvider>
+    </ChakraProvider>
   );
 };
 
